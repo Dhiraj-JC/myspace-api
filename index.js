@@ -3,6 +3,9 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const { connect } = require('mongoose');
 const authenticateRouter = require('./routes/authenticate');
+const productRouter = require('./routes/product');
+const tokenValidatorMiddleware = require('./middlewares/tokenValidatorMiddleware');
+// const customLoggerMiddleware = require('./middlewares/customLoggerMiddleware');
 
 const app = express();
 dotenv.config();
@@ -14,18 +17,19 @@ connect(
     if (err) {
       console.log(err);
     }
-
     console.log('Database connection established');
   }
 );
 
 app.use(express.json());
 app.use(cors());
-app.use('/auth',authenticateRouter);
+// app.use(customLoggerMiddleware);
+app.use('/auth', authenticateRouter);
+app.use('/products',tokenValidatorMiddleware, productRouter);
 
 
-app.listen(process.env.PORT, (err)=> {
+app.listen(process.env.PORT, (err) => {
 
-  if(err) console.log(err);
+  if (err) console.log(err);
   console.log(`Listening on port ${process.env.PORT}`);
 });
