@@ -14,8 +14,6 @@ bookRouter.get('/', async (req, res) => {
 
 });
 
-
-
 //Specific book
 bookRouter.get('/:id', async (req, res) => {
     const id = req.params.id;
