@@ -23,13 +23,6 @@ const userSchema = new Schema({
         required: true,
         trim: true,
         minlength: 8,
-        validate: {
-            validator:(value) => {
-                const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/;
-                return passwordPattern.test(value);
-            },
-            message: props => `password is not valid`
-        },
     }
 });
 
