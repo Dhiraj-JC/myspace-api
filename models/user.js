@@ -1,15 +1,15 @@
-const {Schema,model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
 
-    userName : {
+    userName: {
         type: String,
         required: true,
         trim: true,
         lowercase: true,
         unique: 1,
         validate: {
-            validator:(value) => {
+            validator: (value) => {
                 const emailPattern = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
                 return emailPattern.test(value);
             },
@@ -18,7 +18,7 @@ const userSchema = new Schema({
 
     },
 
-    password : {
+    password: {
         type: String,
         required: true,
         trim: true,
@@ -26,4 +26,4 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = model('User',userSchema );
+module.exports = model('User', userSchema);
