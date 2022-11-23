@@ -7,6 +7,7 @@ const productRouter = require('./routes/product');
 const bookRouter = require('./routes/book');
 const tokenValidatorMiddleware = require('./middlewares/tokenValidatorMiddleware');
 const customLoggerMiddleware = require('./middlewares/customLoggerMiddleware');
+const compression = require('compression');
 
 const app = express();
 dotenv.config();
@@ -22,6 +23,7 @@ connect(
   }
 );
 
+app.use(compression());
 app.use(express.json());
 app.use(cors());
 app.use(customLoggerMiddleware);

@@ -17,13 +17,29 @@ const userSchema = new Schema({
         },
 
     },
-
     password: {
         type: String,
         required: true,
         trim: true,
         minlength: 8,
+    },
+    createdAt: {
+        type: Date,
+    },
+    updatedAt: {
+        type: Date,
     }
+});
+
+userSchema.pre('save', function (next) {
+    let currentDatTime = Date.now();
+    this.updatedAt = currentDatTime;
+
+    if(!this.createdAt) {
+        this.createdAt = currentDatTime;
+    }
+
+    next();
 });
 
 module.exports = model('User', userSchema);
